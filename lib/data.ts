@@ -1,4 +1,4 @@
-import postgres from 'postgres';
+import sql from '@/lib/db';
 import {
   CustomerField,
   CustomersTableType,
@@ -6,10 +6,8 @@ import {
   InvoicesTable,
   LatestInvoiceRaw,
   Revenue,
-} from './definitions';
-import { formatCurrency } from './utils';
-
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+} from '../app/lib/definitions';
+import { formatCurrency } from '../app/lib/utils';
 
 export async function fetchRevenue() {
   try {
