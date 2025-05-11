@@ -8,14 +8,12 @@ import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import { lusitana } from '@/app/ui/fonts';
 import { Suspense } from 'react';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
+
  
 export default async function Page({
   searchParams,
 }: {
-    searchParams?: {
-    query?: string;
-    page?: string;
-  };
+  searchParams?: Record<string, string | string | undefined>;
 }) {
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
