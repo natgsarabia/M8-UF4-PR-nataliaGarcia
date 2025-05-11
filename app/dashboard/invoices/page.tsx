@@ -1,5 +1,5 @@
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/invoices/table';
