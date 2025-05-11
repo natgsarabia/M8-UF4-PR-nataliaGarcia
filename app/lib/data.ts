@@ -1,4 +1,4 @@
-import sql from '@/lib/db';
+import {sql} from '@/lib/db';
 import {
   CustomerField,
   CustomersTableType,
@@ -86,6 +86,7 @@ export async function fetchFilteredInvoices(
   currentPage: number,
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  console.log('Fetching invoices with query:', query, 'and currentPage:', currentPage);
 
   try {
     const invoices = await sql<InvoicesTable>`

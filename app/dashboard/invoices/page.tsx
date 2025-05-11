@@ -1,25 +1,27 @@
+
 export const dynamic = 'force-dynamic';
 
-import Pagination from '@/app/ui/invoices/pagination';
-import { fetchFilteredInvoices ,fetchInvoicesPages } from '@/app/lib/data';
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/invoices/table';
 import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import { lusitana } from '@/app/ui/fonts';
 import { Suspense } from 'react';
+import Pagination from '@/app/ui/invoices/pagination';
+
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 
- 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: Record<string, string | string[] | undefined>;
-}) {
-  const rawQuery = searchParams?.query;
-const query = Array.isArray(rawQuery) ? rawQuery[0] : rawQuery ?? '';
-  const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = await fetchInvoicesPages(query);
+import PaginationWrapper from '@/app/ui/invoices/PaginationWrapper';
 
+type PageProps = {
+  query?: string;
+  page?: number;
+}
+
+export default async  function Page({ query = '', page = 1 }: PageProps)  {
+  const currentPage = page;
+
+  
+console.log('POSTGRES_URL:', process.env.POSTGRES_URL);
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
@@ -33,7 +35,7 @@ const query = Array.isArray(rawQuery) ? rawQuery[0] : rawQuery ?? '';
         <Table query={query} currentPage={currentPage} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPages} />
+        <PaginationWrapper query={query} />
       </div>
     </div>
   );
