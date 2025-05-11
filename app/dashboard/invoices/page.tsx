@@ -13,9 +13,10 @@ import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: Record<string, string | string | undefined>;
+  searchParams?: Record<string, string | string[] | undefined>;
 }) {
-  const query = searchParams?.query || '';
+  const rawQuery = searchParams?.query;
+const query = Array.isArray(rawQuery) ? rawQuery[0] : rawQuery ?? '';
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchInvoicesPages(query);
 
